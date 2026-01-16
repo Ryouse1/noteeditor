@@ -28,5 +28,15 @@ export default function CanvasEditor({ notes, bpm }: Props) {
     }
   })
 
-  return <canvas ref={ref} />
-}
+return (
+  <canvas
+    ref={ref}
+    style={{
+      display: "block",
+      width: "100vw",
+      height: "100vh",
+      background: "#111"
+    }}
+  />
+)
+
