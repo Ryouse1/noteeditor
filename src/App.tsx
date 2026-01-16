@@ -1,5 +1,5 @@
 import { useState } from "react"
-import CanvasEditor from "./editor/CanvasEditor"
+import CanvasEditor from "./core/editor/CanvasEditor"
 import { Note } from "./core/model/Note"
 
 export default function App() {
