@@ -1,7 +1,7 @@
 // src/editor/CanvasEditor.tsx
 import { useRef, useEffect } from "react"
 import { Note } from "../core/model/Note"
-import { drawGrid } from "../core/timeline/Grid"
+import { drawGrid } from "../timeline/Grid"
 
 interface Props {
   notes: Note[]
