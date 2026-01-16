@@ -1,4 +1,4 @@
-// src/editor/CanvasEditor.tsx
+// src/core/editor/CanvasEditor.tsx
 import { useRef, useEffect } from "react"
 import { Note } from "../model/Note"
 import { drawGrid } from "../timeline/Grid"
@@ -13,33 +13,39 @@ export default function CanvasEditor({ notes, bpm }: Props) {
   const pps = 120
 
   useEffect(() => {
-  const canvas = ref.current
-  if (!canvas) return
-  const ctx = canvas.getContext("2d")
-  if (!ctx) return
+    const canvas = ref.current
+    if (!canvas) return
 
-  canvas.width = window.innerWidth
-  canvas.height = window.innerHeight
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height)
-  drawGrid(ctx, canvas.width, canvas.height, bpm, pps)
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
 
-  for (const n of notes) {
-    const y = n.time * pps
-    ctx.fillStyle = "red"
-    ctx.fillRect(0, 0, 100, 100)
-  }
-}, [notes, bpm])
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    drawGrid(ctx, canvas.width, canvas.height, bpm, pps)
 
-return (
-  <canvas
-    ref={ref}
-    style={{
-      display: "block",
-      width: "100vw",
-      height: "100vh",
-      background: "#111"
-    }}
-  />
-)
+    for (const n of notes) {
+      const y = n.time * pps
+      ctx.fillStyle = n.color
+      ctx.fillRect(
+        n.lane * 80 + 10,
+        y,
+        60,
+        Math.max(12, n.duration * pps)
+      )
+    }
+  }, [notes, bpm])
 
+  return (
+    <canvas
+      ref={ref}
+      style={{
+        display: "block",
+        width: "100vw",
+        height: "100vh",
+        background: "#111"
+      }}
+    />
+  )
+}
